@@ -1,0 +1,40 @@
+{
+    "version": 10,
+    "$comment": "csCMake presets, sibling layout (presets/layout/sibling.json), plus the values of this library (it does not use csCMake): the fmt of third_party_base_libs instead of the bundled copy, position independent, no example; macOS 13.3",
+    "include": [
+        "${sourceParentDir}/csCMake/presets/csCMakeProjectSetup-common.json"
+    ],
+    "configurePresets": [
+        {
+            "name": "cscmake-project-setup",
+            "hidden": true,
+            "inherits": "cscmake-common-project-setup",
+            "environment": {
+                "CSCMAKE_WORKSPACE_ROOT": "${sourceParentDir}",
+                "CSCMAKE_ROOT": "$env{CSCMAKE_WORKSPACE_ROOT}/csCMake",
+                "CSCMAKE_BUILD_SUB_DIR": "$env{CSCMAKE_CSV1_SUB_DIR}"
+            },
+            "cacheVariables": {
+                "SPDLOG_FMT_EXTERNAL": "ON",
+                "SPDLOG_BUILD_PIC": "ON",
+                "SPDLOG_BUILD_EXAMPLE": "OFF"
+            }
+        },
+        {
+            "name": "cscmake-project-setup-linux",
+            "hidden": true
+        },
+        {
+            "name": "cscmake-project-setup-windows",
+            "hidden": true
+        },
+        {
+            "name": "cscmake-project-setup-macos",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_OSX_DEPLOYMENT_TARGET": "13.3",
+                "CMAKE_PROJECT_INCLUDE": "modules/scripts/csRecordMacosDeploymentTarget"
+            }
+        }
+    ]
+}
